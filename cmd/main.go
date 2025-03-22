@@ -1,13 +1,14 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"explorekg/internal/app"
+	"log"
+)
 
 func main() {
-	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	router.Run() // listen and serve on 0.0.0.0:8080
+	router := app.App()
+	err := router.Run(":8080")
+	if err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }
