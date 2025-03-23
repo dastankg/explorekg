@@ -7,11 +7,16 @@ import (
 )
 
 type Config struct {
-	Db DbConfig
+	Db   DbConfig
+	Auth AuthConfig
 }
 
 type DbConfig struct {
 	DATABASE_URL string
+}
+type AuthConfig struct {
+	AccessToken  string
+	RefreshToken string
 }
 
 func LoadConfig() *Config {
@@ -22,6 +27,10 @@ func LoadConfig() *Config {
 	return &Config{
 		Db: DbConfig{
 			DATABASE_URL: os.Getenv("DATABASE_URL"),
+		},
+		Auth: AuthConfig{
+			AccessToken:  os.Getenv("ACCESS_TOKEN"),
+			RefreshToken: os.Getenv("REFRESH_TOKEN"),
 		},
 	}
 }
