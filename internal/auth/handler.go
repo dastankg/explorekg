@@ -27,6 +27,14 @@ func NewAuthHandler(router *gin.Engine, deps AuthHandlerDeps) {
 	}
 }
 
+// @Summary Аутентификация пользователя
+// @Description Аутентификация 	пользователя и возвращает токены
+// @Tags auth
+// @Accept json
+// @Produce json
+// @Param request body LoginRequest true "Данные для аутентификация"
+// @Success 201 {object} LoginResponse "Успешная аутентификация"
+// @Router /auth/login [post]
 func (handler *AuthHandler) Login(c *gin.Context) {
 	var body LoginRequest
 	if err := c.ShouldBindJSON(&body); err != nil {
